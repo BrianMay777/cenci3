@@ -21,6 +21,7 @@ describe ProviderPin do
       end
       it "should find a ProviderPin if it exists" do
         ProviderPin.find_by_pin(@good_pin).should == @pin
+        ProviderPin.find_by_pin(@good_pin).should be_valid
       end
       it "should return an invalid pin otherwise" do
         ProviderPin.find_by_pin(@bad_pin).should_not be_valid
