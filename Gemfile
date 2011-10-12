@@ -13,6 +13,7 @@ end
 gem 'jquery-rails'
 gem 'slim-rails'
 gem 'simple_form'
+gem 'sorcery'
 
 gem 'unicorn'
 gem 'configy'
