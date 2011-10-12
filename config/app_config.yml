@@ -1,0 +1,9 @@
+common:
+  providers:
+    - 'telintel'
+
+development:
+
+test:
+
+production:

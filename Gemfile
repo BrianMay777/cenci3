@@ -11,7 +11,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'slim-rails'
+gem 'simple_form'
+
 gem 'unicorn'
+gem 'configy'
 
 group :development, :test, do
 # gem 'capistrano'
