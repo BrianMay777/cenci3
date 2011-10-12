@@ -1,6 +1,6 @@
 Given /^I bought a kit with the pin (\d+)$/ do |pin|
-  @pin = Fabricate(:pin, :pin => pin)
-  Pin.count.should == 1
+  @provider_pin = Fabricate(:provider_pin, :pin => pin)
+  ProviderPin.count.should == 1
 end
 
 Given /^I go to new enrollment page$/ do
@@ -8,7 +8,7 @@ Given /^I go to new enrollment page$/ do
 end
 
 When /^I enter my pin$/ do
-  fill_in('Pin', :with => @pin.pin)
+  fill_in('Pin', :with => @provider_pin.pin)
 end
 
 When /^I push "([^"]*)"$/ do |button_name|
@@ -16,7 +16,7 @@ When /^I push "([^"]*)"$/ do |button_name|
 end
 
 Then /^I will see a new form asking about me$/ do
-  current_path.should == new_accounts_path(@pin.pin)
+  current_path.should == new_accounts_path(@provider_pin.pin)
 end
 
 When /^I tell the form about me:$/ do |table|

@@ -1,4 +1,4 @@
-class Pin
+class ProviderPin
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -9,11 +9,11 @@ class Pin
   validates :provider, :presence => true, :inclusion => { :in => AppConfig.providers }
 
   def self.find_by_pin(pin)
-    Pin.where(:pin => pin).limit(1).first || pin_not_found
+    where(:pin => pin).limit(1).first || pin_not_found
   end
 
   def self.pin_not_found
-    pin = Pin.new
+    pin = new
     pin.errors[:pin] << 'Pin not found!'
     pin
   end

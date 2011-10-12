@@ -1,14 +1,14 @@
 class EnrollmentsController < ApplicationController
   def new
-    @pin = Pin.new
+    @provider_pin = ProviderPin.new
   end
 
   def create
-    @pin = Pin.find_by_pin(:pin => params[:pin][:pin])
-    if @pin.new_record?
+    @provider_pin = ProviderPin.find_by_pin(:pin => params[:provider_pin][:pin][0..9])
+    if @provider_pin.new_record?
       render :new
     else
-      redirect_to new_account_path(@pin.pin)
+      redirect_to new_account_path(@provider_pin.pin)
     end
   end
 end
