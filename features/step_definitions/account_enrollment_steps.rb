@@ -47,7 +47,7 @@ Then /^an email should be sent to me$/ do
 end
 
 Then /^an email should be sent to the admins$/ do
-  pending # express the regexp above with the code you wish you had
+  unread_emails_for(AppConfig.email['admin']).size.should == 1
 end
 
 Then /^I will be waiting on approval, hope it's quick$/ do
