@@ -1,0 +1,5 @@
+= simple_form_for :session, :url => login_path, :method => :post do |f|
+  = f.input :username, :as => :string
+  = f.input :password, :as => :password
+  = f.input :remember_me, :as => :boolean
+  = link_to 'Login', '#', :onclick => "$('form').submit()"

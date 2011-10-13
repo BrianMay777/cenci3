@@ -11,5 +11,11 @@ body
   p.notice = notice
   p.alert = alert
 
+  - if current_user
+    = render :partial => 'shared/logout_form'
+  - else
+    = render :partial => 'shared/login_form'
+
+
   = yield
 

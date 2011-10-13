@@ -1,7 +1,6 @@
 class Account < User
   authenticates_with_sorcery!
 
-  field :name, :type => String, :default => nil
   field :address, :type => String
   field :phone, :type => String
   field :id_type, :type => String
