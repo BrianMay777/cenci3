@@ -9,6 +9,7 @@ worker_processes 3
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
 listen "/tmp/unicorn_server_cenci.socket", :backlog => 64
+listen "127.0.0.1:9090"
 
 # Preload our app for more speed
 preload_app true
