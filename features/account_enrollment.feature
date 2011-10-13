@@ -1,5 +1,10 @@
 @http://www.pivotaltracker.com/story/show/19509981 @account @enroll @i1
 Feature: Account Enrollment - Its me Juan...I bought a kit yo, and I wanna get it started up
+
+  I am Juan and I bought a $50 kit from Joel
+  I want to enroll my kit to activate my account
+  So I can enroll more folks
+
   Scenario: I bought a kit yo, and I wanna get it started up
     Given I bought a kit with the pin 1111111111
       And I go to new enrollment page
