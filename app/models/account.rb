@@ -27,4 +27,8 @@ class Account < User
     AdminMailer.account_pending_email(self).deliver
   end
 
+  def active?
+    false
+  end
+
 end

@@ -51,7 +51,7 @@ Then /^an email should be sent to the admins$/ do
 end
 
 Then /^I will be waiting on approval, hope it's quick$/ do
-  pending # express the regexp above with the code you wish you had
+  @account.should_not be_active
 end
 
 
