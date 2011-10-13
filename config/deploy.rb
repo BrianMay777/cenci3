@@ -12,7 +12,7 @@ set :normalize_asset_timestamps, false
 
 set :user,            "deploy"
 set :group,           "staff"
-set :use_sudo,        true
+set :use_sudo,        false
 set :sudo_prompt,     ""
 
 role :web,    "dev01.cenciyo.com"
