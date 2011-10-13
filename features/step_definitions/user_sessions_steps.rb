@@ -40,3 +40,12 @@ Then /^I should see a take it easy message$/ do
   page.should have_content("See ya later dog!")
 end
 
+When /^I enter my bogus authentication info$/ do
+  fill_in('Username', :with => 'bogus')
+  fill_in('Password', :with => 'mcfogus')
+end
+
+Then /^I should see a firm rejection$/ do
+  page.should have_content("Your info did not checkout dog")
+end
+

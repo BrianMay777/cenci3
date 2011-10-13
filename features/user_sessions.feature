@@ -13,3 +13,10 @@ Feature: User Sessions - I am some form of user and I need to login and logout
       And I am on the root page
     When I click logout
     Then I should see a take it easy message
+
+  Scenario: Unknown users cannot login
+    Given I am on the root page
+    When I enter my bogus authentication info
+      And click login
+    Then I should see a firm rejection
+

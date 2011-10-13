@@ -6,8 +6,7 @@ class SessionsController < ApplicationController
     if user
       redirect_back_or_to root_url, :notice => "Welcome back #{user.name}!"
     else
-      flash.now.alert = 'Username or password was invalid!'
-      render :new
+      redirect_to root_url, :alert => "Your info did not checkout dog!"
     end
   end
 
