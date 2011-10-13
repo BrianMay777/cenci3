@@ -39,11 +39,11 @@ Then /^I will be on some dashboard thingy page$/ do
 end
 
 Then /^I will see something demanding I check my email$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content 'We sent you an email, holla back yo!'
 end
 
 Then /^an email should be sent to me$/ do
-  pending # express the regexp above with the code you wish you had
+  unread_emails_for(@account.email).size.should == 1
 end
 
 Then /^an email should be sent to the admins$/ do

@@ -16,7 +16,10 @@ class Account < User
     self.username
   end
 
-  before_create
+  after_create :send_welcome_email!
+  def send_welcome_email!
+    AccountMailer.welcome_email(self).deliver
+  end
 
 
 end

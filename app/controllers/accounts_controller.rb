@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   before_filter :find_provider_pin!, :only => [ :new ]
   before_filter :normalize_agree_to_terms!, :only => [ :create ]
+  before_filter :require_login, :only => [ :show ]
 
   def new
     @account = Account.new(:provider_pin => @provider_pin)
@@ -13,7 +14,9 @@ class AccountsController < ApplicationController
     unless @account.save
       render :new
     else
+      auto_login @account
       flash[:notice] = "Thank you for enrolling #{@account.name}!"
+      flash[:notice] << 'We sent you an email, holla back yo!' unless @account.email.blank?
       redirect_to account_path(@account)
     end
   end

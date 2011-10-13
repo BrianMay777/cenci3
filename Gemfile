@@ -25,6 +25,7 @@ group :development, :test, do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails', '~> 2.6.1'
   gem 'mongoid-rspec', '~> 1.4.4'
+  gem 'email_spec'
   gem 'cucumber-rails', '~> 1.1.1'
   gem 'capybara', '~> 1.1.1'
   gem 'fabrication'

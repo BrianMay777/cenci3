@@ -1,4 +1,6 @@
 common:
+  email:
+    from: 'no-reply@cenciyo.com'
   providers:
     - 'telintel'
 
