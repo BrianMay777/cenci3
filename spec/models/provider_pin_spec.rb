@@ -23,8 +23,8 @@ describe ProviderPin do
         ProviderPin.find_by_pin(@good_pin).should == @pin
         ProviderPin.find_by_pin(@good_pin).should be_valid
       end
-      it "should return an invalid pin otherwise" do
-        ProviderPin.find_by_pin(@bad_pin).should_not be_valid
+      it "should return an nil" do
+        ProviderPin.find_by_pin(@bad_pin).should be_nil
       end
     end
   end

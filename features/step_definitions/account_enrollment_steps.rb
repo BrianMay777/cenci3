@@ -16,12 +16,13 @@ When /^I push "([^"]*)"$/ do |button_name|
 end
 
 Then /^I will see a new form asking about me$/ do
-  current_path.should == new_accounts_path(@provider_pin.pin)
+  current_path.should == new_account_path
 end
 
 When /^I tell the form about me:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.first.each_pair do |k, v|
+    fill_in(k, :with => v)
+  end
 end
 
 When /^I swear that I read the terms and agree, ha$/ do

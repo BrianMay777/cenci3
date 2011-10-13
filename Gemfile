@@ -30,6 +30,7 @@ group :development, :test, do
   gem 'fabrication'
   gem 'database_cleaner', '~> 0.6.7'
   gem 'pickler'
+  gem 'launchy'
 end
 
 group :console do

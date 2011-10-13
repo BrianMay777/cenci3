@@ -7,11 +7,8 @@ Feature: Account Enrollment - Its me Juan...I bought a kit yo, and I wanna get i
       And I push "Enroll Me!"
     Then I will see a new form asking about me
     When I tell the form about me:
-      | ID Number | 559237193 |
-      | ID Type | SSN |
-      | Name | Juan Diaz |
-      | Address | 311 Matrix Lane |
-      | Phone | 4155551212 |
+      | Id number | Id type | Name      | Address                            | Email          | Phone      | Password | Password confirm |
+      | 559237193 | SSN     | Juan Diaz | 311 Matrix Way Lafayette, CA 94549 | juan@gmail.com | 4155551212 | 12345678 | 12345678         |
       And I swear that I read the terms and agree, ha
       And I push "Join the team!"
     Then I will be on some dashboard thingy page

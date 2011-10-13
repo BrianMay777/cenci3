@@ -1,0 +1,12 @@
+= simple_form_for @account do |f|
+  = f.input :pin, :disabled => true, :as => :integer
+  = f.input :provider_pin, :as => :hidden, :value => @provider_pin.id
+  = f.input :name, :as => :string
+  = f.input :email, :as => :email
+  = f.input :address, :as => :string
+  = f.input :phone, :as => :tel
+  = f.input :id_number, :as => :string
+  = f.input :id_type, :as => :string
+  = f.input :password, :as => :password
+  = f.input :password_confirm, :as => :password
+  = f.submit   'Enroll Me!'

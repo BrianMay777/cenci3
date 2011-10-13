@@ -89,6 +89,8 @@ GEM
     json (1.6.1)
     json_pure (1.6.1)
     kgio (2.6.0)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     libv8 (3.3.10.2)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
@@ -246,6 +248,7 @@ DEPENDENCIES
   database_cleaner (~> 0.6.7)
   fabrication
   jquery-rails
+  launchy
   looksee
   mongoid (= 2.3.0)
   mongoid-rspec (~> 1.4.4)
