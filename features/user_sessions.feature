@@ -1,7 +1,21 @@
 @http://www.pivotaltracker.com/story/show/19661543 @i1 @users @javascript
 Feature: User Sessions - I am some form of user and I need to login and logout
   Scenario: User logs in and gets a session
-    Given I am an active user named "Brad"
+    Given I am an active user named "Brian"
+      And I am on the root page
+    When I enter my authentication info
+      And click login
+    Then I should see a welcome back message
+
+  Scenario: Account logs in and gets a session
+    Given I am an active account named "Juan"
+      And I am on the root page
+    When I enter my authentication info
+      And click login
+    Then I should see a welcome back message
+
+  Scenario: Agent logs in and gets a session
+    Given I am an active agent named "Joel"
       And I am on the root page
     When I enter my authentication info
       And click login

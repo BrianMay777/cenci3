@@ -1,9 +1,9 @@
-Given /^I am an active user named "([^"]*)"$/ do |name|
+Given /^I am an active (user|account|agent) named "([^"]*)"$/ do |user_type, name|
   @name = name
   @password = 'password'
   @username = 'username'
   @email    = 'email@email.com'
-  @user = Fabricate(:user, :username => @username, :name => @name,
+  @user = Fabricate(user_type.to_sym, :username => @username, :name => @name,
                     :password => @password, :password_confirm => @password)
 end
 
