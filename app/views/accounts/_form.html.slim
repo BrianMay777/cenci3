@@ -1,6 +1,6 @@
 = simple_form_for @account do |f|
-  = f.input :pin, :disabled => true, :as => :integer
-  = f.input :provider_pin, :as => :hidden, :value => @provider_pin.id
+  = f.error_notification
+  = f.input :pin, :disabled => true, :as => :string, :input_html => { :value => @provider_pin.pin.to_s }
   = f.input :name, :as => :string
   = f.input :email, :as => :email
   = f.input :address, :as => :string
@@ -9,4 +9,10 @@
   = f.input :id_type, :as => :string
   = f.input :password, :as => :password
   = f.input :password_confirm, :as => :password
-  = f.submit   'Enroll Me!'
+  p.terms
+    = render :partial => 'shared/terms'
+  = f.input :agree_to_terms, :as => :boolean
+  = f.input :provider_pin, :as => :hidden, :input_html => { :value => @provider_pin.id }
+  = f.input :username, :as => :hidden, :input_html => { :value => @provider_pin.pin.to_s }
+  = @account.errors.full_messages
+  = f.submit   'Join the team!'

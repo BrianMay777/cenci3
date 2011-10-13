@@ -1,3 +1,4 @@
 = simple_form_for @provider_pin, :url => enrollments_path do |f|
+  = f.error_notification
   = f.input  :pin
   = f.submit 'Enroll Me!'

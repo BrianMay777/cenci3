@@ -26,11 +26,16 @@ When /^I tell the form about me:$/ do |table|
 end
 
 When /^I swear that I read the terms and agree, ha$/ do
-  pending # express the regexp above with the code you wish you had
+  check(:agree_to_terms)
+end
+
+Then /^my account should be active$/ do
+  @account = Account.last
+  @account.should_not be_nil
 end
 
 Then /^I will be on some dashboard thingy page$/ do
-  pending # express the regexp above with the code you wish you had
+  current_path.should == account_path(@account.id)
 end
 
 Then /^I will see something demanding I check my email$/ do

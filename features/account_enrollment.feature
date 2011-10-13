@@ -11,7 +11,8 @@ Feature: Account Enrollment - Its me Juan...I bought a kit yo, and I wanna get i
       | 559237193 | SSN     | Juan Diaz | 311 Matrix Way Lafayette, CA 94549 | juan@gmail.com | 4155551212 | 12345678 | 12345678         |
       And I swear that I read the terms and agree, ha
       And I push "Join the team!"
-    Then I will be on some dashboard thingy page
+    Then my account should be active
+      And I will be on some dashboard thingy page
       And I will see something demanding I check my email
       And an email should be sent to me
       And an email should be sent to the admins
