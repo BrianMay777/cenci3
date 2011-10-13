@@ -12,7 +12,7 @@ set :normalize_asset_timestamps, false
 
 set :user,            "deploy"
 set :group,           "staff"
-set :use_sudo,        false
+set :use_sudo,        true
 set :sudo_prompt,     ""
 
 role :web,    "dev01.cenciyo.com"
@@ -36,6 +36,9 @@ default_environment["RAILS_ENV"] = 'production'
 #default_environment["RUBY_VERSION"] = "ruby-1.9.2-p290"
 
 default_run_options[:shell] = 'bash'
+set :default_environment, {
+  'PATH' => "/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH"
+}
 
 namespace :deploy do
   desc "Deploy your application"
@@ -49,6 +52,7 @@ namespace :deploy do
     dirs = [deploy_to, shared_path]
     dirs += shared_children.map { |d| File.join(shared_path, d) }
     run "#{try_sudo} mkdir -p #{dirs.join(' ')} && #{try_sudo} chmod g+w #{dirs.join(' ')}"
+    run "#{try_sudo} chown -R deploy:staff #{deploy_to}"
     run "git clone #{repository} #{current_path}"
   end
 
@@ -89,7 +93,7 @@ namespace :deploy do
       mkdir -p #{latest_release}/tmp &&
       ln -s #{shared_path}/log #{latest_release}/log &&
       ln -s #{shared_path}/system #{latest_release}/public/system &&
-      ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
+      ln -s #{shared_path}/pids #{latest_release}/tmp/pids
     CMD
       #ln -sf #{shared_path}/mongoid.yml #{latest_release}/config/mongoid.yml
 
