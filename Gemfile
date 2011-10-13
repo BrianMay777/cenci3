@@ -19,7 +19,7 @@ gem 'unicorn'
 gem 'configy'
 
 group :development, :test, do
-# gem 'capistrano'
+  gem 'capistrano'
   gem 'mongrel', '~> 1.2.0.pre2'
   gem 'therubyracer'
   gem 'ruby-debug19', :require => 'ruby-debug'
