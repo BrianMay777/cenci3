@@ -6,7 +6,7 @@ set :repository,      "git@github.com:bramswenson/cenci3.git"
 set :branch,          "origin/master"
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }
-set :rails_env,       "production"
+set :rails_env,       "development"
 set :deploy_to,       "/var/www/dev01.cenciyo.com"
 set :normalize_asset_timestamps, false
 
@@ -27,17 +27,11 @@ set(:current_revision)  { capture("cd #{current_path}; git rev-parse --short HEA
 set(:latest_revision)   { capture("cd #{current_path}; git rev-parse --short HEAD").strip }
 set(:previous_revision) { capture("cd #{current_path}; git rev-parse --short HEAD@{1}").strip }
 
-default_environment["RAILS_ENV"] = 'production'
-
-# Use our ruby-1.9.2-p290@my_site gemset
-#default_environment["PATH"]         = "--"
-#default_environment["GEM_HOME"]     = "--"
-#default_environment["GEM_PATH"]     = "--"
-#default_environment["RUBY_VERSION"] = "ruby-1.9.2-p290"
-
 default_run_options[:shell] = 'bash'
+
 set :default_environment, {
   'PATH' => "/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH"
+  'RAILS_ENV' => 'development'
 }
 
 namespace :deploy do
