@@ -1,0 +1,6 @@
+div id="pending_accounts"
+  h4 Pending Accounts
+  - @pending_accounts.all.each do |pending_account|
+    p id="pending_account_#{pending_account.id}"
+      = simple_form_for "pending_account_approval", :url => account_approval_path(pending_account), :html => { :id => "pending_account_approval_form_#{pending_account.id}" } do |f|
+        = link_to "Approve #{pending_account.name}", '#', :onclick => "$('#pending_account_approval_form_#{pending_account.id}').submit()", :id => "pending_account_approval_link_#{pending_account.id}"

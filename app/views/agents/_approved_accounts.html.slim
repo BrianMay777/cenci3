@@ -1,0 +1,4 @@
+div id="approved_accounts"
+  h4 Aproved Accounts
+  - @approved_accounts.all.each do |approved_account|
+    p id="approved_account_#{approved_account.id}" = approved_account.name

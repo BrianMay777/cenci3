@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
                  params[:session][:password],
                  params[:session][:remember_me])
     if user
-      redirect_back_or_to root_url, :notice => "Welcome back #{user.name}!"
+      redirect_back_or_to user_path(user), :notice => "Welcome back #{user.name}!"
     else
       redirect_to root_url, :alert => "Your info did not checkout dog!"
     end

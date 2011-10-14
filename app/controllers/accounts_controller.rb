@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_filter :find_provider_pin!, :only => [ :new ]
   before_filter :normalize_agree_to_terms!, :only => [ :create ]
   before_filter :require_login, :only => [ :show ]
+  before_filter :require_agent, :only => [ :approve ]
 
   def new
     @account = Account.new(:provider_pin => @provider_pin)
@@ -22,6 +23,11 @@ class AccountsController < ApplicationController
   end
 
   def show
+  end
+
+  def approve
+    Account.approve_by_account_id(params[:account_id])
+    redirect_to user_path(current_user)
   end
 
   private
