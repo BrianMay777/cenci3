@@ -1,6 +1,5 @@
 @http://www.pivotaltracker.com/story/show/19570171 @account @i1 @approval @enroll @boss @javascript
 Feature: Account Approval - I'm a boss (Agent), but I like you Juan, so your on the team
-
   I am Joel an Agent of Cenciyo
   And I sold a $50 kit to Juan a 1st Generation Account
   He enrolled with his kit and is pending approval patiently
@@ -16,4 +15,3 @@ Feature: Account Approval - I'm a boss (Agent), but I like you Juan, so your on 
     Then I should be on my dashboard
       And I should see Juan in my list of approved accounts
       And an email should be sent to Juan
-

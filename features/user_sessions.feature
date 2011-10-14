@@ -1,4 +1,4 @@
-@http://www.pivotaltracker.com/story/show/19661543 @i1 @users @javascript
+@http://www.pivotaltracker.com/story/show/19661543 @users @i1 @javascript
 Feature: User Sessions - I am some form of user and I need to login and logout
   Scenario: User logs in and gets a session
     Given I am an active user named "Brian"
@@ -33,4 +33,3 @@ Feature: User Sessions - I am some form of user and I need to login and logout
     When I enter my bogus authentication info
       And click login
     Then I should see a firm rejection
-
