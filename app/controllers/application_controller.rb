@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_path(user)
+    return new_enrollment_path if user._type == 'User'
     send "#{user._type.downcase}_path", user
   end
 

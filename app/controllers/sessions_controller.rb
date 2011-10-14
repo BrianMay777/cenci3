@@ -6,12 +6,12 @@ class SessionsController < ApplicationController
     if user
       redirect_back_or_to user_path(user), :notice => "Welcome back #{user.name}!"
     else
-      redirect_to root_url, :alert => "Your info did not checkout dog!"
+      redirect_to new_enrollment_path, :alert => "Your info did not checkout dog!"
     end
   end
 
   def destroy
     logout
-    redirect_to root_url, :notice => 'See ya later dog!'
+    redirect_to new_enrollment_path, :notice => 'See ya later dog!'
   end
 end
