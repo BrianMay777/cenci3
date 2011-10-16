@@ -3,6 +3,6 @@ class AgentsController < ApplicationController
 
   def show
     @approved_accounts = Account.approved
-    @pending_accounts = Account.pending_approval
+    @pending_accounts = Account.pending
   end
 end

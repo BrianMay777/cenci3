@@ -1,6 +1,7 @@
 Given /^I bought a kit with the pin (\d+)$/ do |pin|
   @provider_pin = Fabricate(:provider_pin, :pin => pin)
   ProviderPin.count.should == 1
+  @provider_pin.should be_loaded
 end
 
 Given /^I go to new enrollment page$/ do
@@ -20,18 +21,32 @@ Then /^I will see a new form asking about me$/ do
 end
 
 When /^I tell the form about me:$/ do |table|
-  table.hashes.first.each_pair do |k, v|
-    fill_in(k, :with => v)
+  within('#new_account') do
+    table.hashes.first.each_pair do |k, v|
+      @name = v if k == 'Name'
+      fill_in(k, :with => v)
+    end
   end
 end
 
 When /^I swear that I read the terms and agree, ha$/ do
-  check(:agree_to_terms)
+  within('#new_account') do
+    check(:agree_to_terms)
+  end
 end
 
-Then /^my account should be active$/ do
-  @account = Account.last
-  @account.should_not be_nil
+Then /^my account should be pending$/ do
+  @account = Account.where(:name => @name).first
+  @account.should be_a(Account)
+  @account.state.should == :pending
+end
+
+Then /^my pin should be assigned to me$/ do
+  @account.provider_pin.should == @provider_pin
+end
+
+Then /^my username should be my pin$/ do
+  @account.username.to_s.should == @provider_pin.pin.to_s
 end
 
 Then /^I will be on some dashboard thingy page$/ do
@@ -51,7 +66,5 @@ Then /^an email should be sent to the admins$/ do
 end
 
 Then /^I will be waiting on approval, hope it's quick$/ do
-  @account.should_not be_active
+  @account.should be_pending
 end
-
-

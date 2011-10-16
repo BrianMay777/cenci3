@@ -11,10 +11,10 @@ class AccountsController < ApplicationController
   def create
     @provider_pin = ProviderPin.find(params[:account].delete(:provider_pin))
     @account = Account.new(params[:account])
-    @account.provider_pin = @provider_pin
     unless @account.save
       render :new
     else
+      @provider_pin.assign!(@account)
       auto_login @account
       flash[:notice] = "Thank you for enrolling #{@account.name}!"
       flash[:notice] << 'We sent you an email, holla back yo!' unless @account.email.blank?
@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
   end
 
   def approve
-    Account.approve_by_account_id(params[:account_id])
+    Account.approve_by_account_id(params[:account_id], current_user)
     redirect_to user_path(current_user)
   end
 
@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
 
     def normalize_agree_to_terms!
       agree_to_terms = params[:account].delete(:agree_to_terms)
-      params[:account][:agree_to_terms] = agree_to_terms == 1 ? DateTime.now : nil
+      params[:account][:agree_to_terms] = [ true, 1, '1' ].include?(agree_to_terms) ? DateTime.now : nil
     end
 
 end

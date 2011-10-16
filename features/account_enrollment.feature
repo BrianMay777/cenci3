@@ -1,4 +1,4 @@
-@http://www.pivotaltracker.com/story/show/19509981 @account @enroll @i1
+@http://www.pivotaltracker.com/story/show/19509981 @account @enroll @i1 @javascript
 Feature: Account Enrollment - Its me Juan...I bought a kit yo, and I wanna get it started up
   I am Juan and I bought a $50 kit from Joel
   I want to enroll my kit to activate my account
@@ -15,7 +15,9 @@ Feature: Account Enrollment - Its me Juan...I bought a kit yo, and I wanna get i
       | 559237193 | SSN     | Juan Diaz | 311 Matrix Way Lafayette, CA 94549 | juan@gmail.com | 4155551212 | 12345678 | 12345678         |
       And I swear that I read the terms and agree, ha
       And I push "Join the team!"
-    Then my account should be active
+    Then my account should be pending
+      And my pin should be assigned to me
+      And my username should be my pin
       And I will be on some dashboard thingy page
       And I will see something demanding I check my email
       And an email should be sent to me
