@@ -51,8 +51,6 @@ module Cenci3
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.compile = true
-
     # Generators and such
     config.generators do |g|
       g.test_framework      :rspec, :fixture => true
