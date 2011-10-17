@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_filter :find_provider_pin!, :only => [ :new ]
+  before_filter :find_provider_pin!, :only => [ :new, :create ]
   before_filter :normalize_agree_to_terms!, :only => [ :create ]
   before_filter :require_login, :only => [ :show, :register_pin ]
   before_filter :require_agent, :only => [ :approve ]
@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
   def create
     @account = Account.create_with_provider_pin(params[:account])
     unless @account.valid?
-      @provider_pin = @account.provider_pin
       render :new
     else
       auto_login @account
@@ -40,7 +39,7 @@ class AccountsController < ApplicationController
   private
 
     def find_provider_pin!
-      @provider_pin = ProviderPin.find(params[:provider_pin_id])
+      @provider_pin = ProviderPin.find(params[:provider_pin_id]||params[:account][:provider_pin])
       unless @provider_pin
         flash[:error] = 'Pin not found!'
         return redirect_to new_enrollment_path
