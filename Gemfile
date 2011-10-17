@@ -12,6 +12,7 @@ gem 'workflow_on_mongoid'
 
 gem 'unicorn'
 gem 'configy'
+gem 'therubyracer'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
@@ -22,7 +23,6 @@ end
 group :development, :test, do
   gem 'capistrano'
   gem 'mongrel', '~> 1.2.0.pre2'
-  gem 'therubyracer'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails', '~> 2.6.1'
   gem 'mongoid-rspec', '~> 1.4.4'
