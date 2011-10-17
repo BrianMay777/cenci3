@@ -9,12 +9,11 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @provider_pin = ProviderPin.find(params[:account].delete(:provider_pin))
-    @account = Account.new(params[:account])
-    unless @account.save
+    @account = Account.create_with_provider_pin(params[:account])
+    unless @account.valid?
+      @provider_pin = @account.provider_pin
       render :new
     else
-      @provider_pin.assign!(@account)
       auto_login @account
       flash[:notice] = "Thank you for enrolling #{@account.name}!"
       flash[:notice] << 'We sent you an email, holla back yo!' unless @account.email.blank?

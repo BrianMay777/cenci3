@@ -1,5 +1,6 @@
 Given /^I bought a kit with the pin (\d+)$/ do |pin|
-  @provider_pin = Fabricate(:provider_pin, :pin => pin)
+  @pin = pin
+  @provider_pin = Fabricate(:provider_pin, :pin => @pin)
   ProviderPin.count.should == 1
   @provider_pin.should be_loaded
 end
@@ -9,7 +10,7 @@ Given /^I go to new enrollment page$/ do
 end
 
 When /^I enter my pin$/ do
-  fill_in('Pin', :with => @provider_pin.pin)
+  fill_in('Pin', :with => @pin)
 end
 
 When /^I push "([^"]*)"$/ do |button_name|
@@ -67,4 +68,34 @@ end
 
 Then /^I will be waiting on approval, hope it's quick$/ do
   @account.should be_pending
+end
+
+# downline enrollment specific steps
+Given /^I bought a kit from Juan with the pin (\d+)$/ do |pin|
+  @pin = pin
+  @agent = Fabricate(:agent)
+  @parent_pin = Fabricate(:provider_pin)
+  @parent_account = Fabricate(:account,
+                              :name => "Juan",
+                              :username => @parent_pin.pin,
+                              :agree_to_terms => DateTime.now)
+  @parent_pin.assign!(@parent_account)
+  @parent_account.approve!(@agent)
+  @provider_pin = Fabricate(:provider_pin, :pin => @pin)
+  @provider_pin.register!(@parent_account)
+  reset_mailer
+end
+
+Given /^I go to the new enrollment page$/ do
+  visit(new_enrollment_path)
+end
+
+Then /^my parent should be Juan$/ do
+  @account = Account.where(:name => 'Jorge Diaz').first
+  @account.should be_a(Account)
+  @account.parent.should == @parent_account
+end
+
+Then /^I should be Juans child$/ do
+  @parent_account.children.all.should include(@account)
 end

@@ -14,6 +14,9 @@ class Account < User
   has_many   :registered_pins, :class_name => 'ProviderPin', :inverse_of => :registered_by
   belongs_to :approved_by, :class_name => 'Agent', :inverse_of => :approved_accounts
 
+  belongs_to :parent,   :class_name => 'Account', :inverse_of => :children
+  has_many   :children, :class_name => 'Account', :inverse_of => :parent
+
   validates :address, :presence => true
   validates :phone, :presence => true
   validates :id_type, :presence => true
@@ -43,6 +46,7 @@ class Account < User
 
   after_create :send_welcome_email!
   after_create :send_account_pending_email!
+  before_save  :update_geneology!
 
   def send_welcome_email!
     AccountMailer.welcome_email(self).deliver
@@ -52,11 +56,30 @@ class Account < User
     AdminMailer.account_pending_email(self).deliver
   end
 
+  def update_geneology!
+    return unless self.parent.nil?
+    return if self.provider_pin.nil?
+    return if self.provider_pin.registered_by.nil?
+    self.parent = self.provider_pin.registered_by
+  end
+
   def self.approve_by_account_id(account_id, agent)
     account = find(account_id)
     raise "Account not found #{account_id}!" unless account
     account.approve!(agent)
     AccountMailer.approval_email(account).deliver
+  end
+
+  def self.create_with_provider_pin(account_params)
+    provider_pin = ProviderPin.find(account_params.delete(:provider_pin))
+    account = new(account_params)
+    return account unless account.save
+    return account unless provider_pin.assign!(account)
+    unless provider_pin.registered_by.nil?
+      provider_pin.registered_by.children << account
+    end
+    account.save
+    account
   end
 
 end

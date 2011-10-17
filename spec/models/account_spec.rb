@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Account do
 
   describe "schema" do
+    it { should be_timestamped_document }
     it { should have_field(:address).of_type(String) }
     it { should have_field(:phone).of_type(String) }
     it { should have_field(:id_type).of_type(String) }
@@ -10,7 +11,10 @@ describe Account do
     it { should have_field(:agree_to_terms).of_type(DateTime) }
     it { should have_field(:approved_at).of_type(DateTime) }
     it { should have_field(:state).of_type(Symbol) }
-    it { should be_timestamped_document }
+    it { should have_one(:provider_pin) }
+    it { should have_many(:registered_pins) }
+    it { should belong_to(:parent) }
+    it { should have_many(:children) }
 
     describe "validations" do
       it { should validate_presence_of(:address) }
