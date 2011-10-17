@@ -1,5 +1,5 @@
 @http://www.pivotaltracker.com/story/show/19510129 @account @downline @agent @i1 @enroll @javascript
-Feature: Account registers downline pin
+Feature: Account registers downline pin - Its Juan again, I want to register a pin I sold to my buddy
   Scenario: Its Juan again, I want to register a pin I sold to my buddy
     Given I am an enrolled approved account named "Juan"
       And I am logged in and on my dashboard
