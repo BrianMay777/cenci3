@@ -10,7 +10,8 @@ class Account < User
   field :approved_at, :type => DateTime
   field :state, :type => Symbol
 
-  has_one :provider_pin
+  has_one    :provider_pin
+  has_many   :registered_pins, :class_name => 'ProviderPin', :inverse_of => :registered_by
   belongs_to :approved_by, :class_name => 'Agent', :inverse_of => :approved_accounts
 
   validates :address, :presence => true

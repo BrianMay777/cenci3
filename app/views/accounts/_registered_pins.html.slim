@@ -1,0 +1,5 @@
+div id="registered_pins"
+  = render :partial => 'register_pin_form'
+  h4 Registered Pins
+  - current_user.registered_pins.each do |registered_pin|
+    p id="registered_pin_#{registered_pin.id}" = registered_pin.pin

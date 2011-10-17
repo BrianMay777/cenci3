@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   before_filter :find_provider_pin!, :only => [ :new ]
   before_filter :normalize_agree_to_terms!, :only => [ :create ]
-  before_filter :require_login, :only => [ :show ]
+  before_filter :require_login, :only => [ :show, :register_pin ]
   before_filter :require_agent, :only => [ :approve ]
 
   def new
@@ -28,6 +28,14 @@ class AccountsController < ApplicationController
   def approve
     Account.approve_by_account_id(params[:account_id], current_user)
     redirect_to user_path(current_user)
+  end
+
+  def register_pin
+    if ProviderPin.register_by_pin(params[:register_pin][:pin], current_user)
+      redirect_to user_path(current_user), :notice => "Thank you for registering a pin #{current_user.name}!"
+    else
+      redirect_to user_path(current_user), :alert => "Pin not found!"
+    end
   end
 
   private

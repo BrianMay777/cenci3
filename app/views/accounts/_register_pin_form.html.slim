@@ -1,0 +1,4 @@
+h4 Register a Pin
+= simple_form_for :register_pin, :url => account_register_pin_path(current_user), :html => { :id => "register_pin_form" }  do |f|
+  = f.input :pin
+  = link_to 'Register', '#', :onclick => "$('#register_pin_form').submit()"
